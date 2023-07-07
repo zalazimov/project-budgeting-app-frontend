@@ -48,7 +48,7 @@ function ShowTransactionDetails() {
 
   return (
     <div className="container">
-      <h1 className="text-center mt-5">Show Transaction</h1>
+      <h1 className="text-center mt-5"></h1>
 
       <div className="card mx-auto mt-5" style={{ width: "24rem" }}>
         <div className="card-body">

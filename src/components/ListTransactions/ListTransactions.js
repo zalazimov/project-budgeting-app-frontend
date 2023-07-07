@@ -23,7 +23,7 @@ function ListTransactions() {
           balance += item.amount;
         }
       });
-      setTotalBalance(balance);
+      setTotalBalance(balance.toFixed(2));
 
       const sortedTransactions = result.data.sort((a, b) => {
         const dateA = new Date(a.date);
@@ -45,19 +45,22 @@ function ListTransactions() {
 
   return (
     <div className="text-center">
-      <h2
-        className={
-          totalBalance > 100
-            ? "text-success"
-            : totalBalance >= 0
-            ? "text-warning"
-            : "text-danger"
-        }
-      >
-        Bank Account Total: ${totalBalance}
+      <h2 className="mt-4">
+        Bank Account Total:{" "}
+        <span
+          className={
+            totalBalance > 100
+              ? "text-success"
+              : totalBalance >= 0
+              ? "text-warning"
+              : "text-danger"
+          }
+        >
+          ${totalBalance}
+        </span>
       </h2>
       <div className="table-responsive">
-        <table className="table table-bordered table-striped">
+        <table className="table table-bordered table-striped mt-3">
           <thead className="table-dark">
             <tr>
               <th>Date</th>
@@ -85,9 +88,13 @@ function ListTransactions() {
                     to={`/transactions/${id}`}
                   >
                     {item.category !== "Income" ? (
-                      <span className="text-danger">-${item.amount}</span>
+                      <span className="text-danger">
+                        -${item.amount.toFixed(2)}
+                      </span>
                     ) : (
-                      <span className="text-success">+${item.amount}</span>
+                      <span className="text-success">
+                        +${item.amount.toFixed(2)}
+                      </span>
                     )}
                   </Link>
                 </td>

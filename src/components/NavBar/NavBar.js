@@ -9,9 +9,10 @@ function NavBar() {
           <div className="navbar-nav">
             <div className="nav-item">
               <Link className="nav-link" to="/transactions">
-                <span className="fs-1 fw-medium">
+                <span className="fs-1 fw-light">
                   Budget<span className="fw-bold">Expert</span>
-                </span>
+                </span>{" "}
+                <span>by Zalman</span>
               </Link>
             </div>
           </div>
