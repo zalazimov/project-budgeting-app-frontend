@@ -16,10 +16,12 @@ function ListTransactions() {
 
       let balance = 0;
       result.data.forEach((item) => {
-        if (item.category !== "Income") {
-          balance -= item.amount;
+        let formattedCategory = item.category.toLowerCase();
+
+        if (formattedCategory !== "income") {
+          balance -= parseFloat(item.amount);
         } else {
-          balance += item.amount;
+          balance += parseFloat(item.amount);
         }
       });
       setTotalBalance(balance.toFixed(2));
@@ -29,13 +31,40 @@ function ListTransactions() {
         const dateB = new Date(b.date);
         return dateA - dateB;
       });
-      // console.log(sortedTransactions);
 
       setTransactionArray(sortedTransactions);
     } catch (e) {
       console.log(e);
     }
   }
+
+  // async function fetchData() {
+  //   try {
+  //     const result = await axios.get(`${API}/transactions`);
+
+  //     let balance = 0;
+  //     result.data.forEach((item) => {
+  //       let formattedCategory = item.category.toLowerCase();
+  //       if (formattedCategory !== "income") {
+  //         balance -= item.amount;
+  //       } else {
+  //         balance += item.amount;
+  //       }
+  //     });
+  //     setTotalBalance(balance.toFixed(2));
+
+  //     const sortedTransactions = result.data.sort((a, b) => {
+  //       const dateA = new Date(a.date);
+  //       const dateB = new Date(b.date);
+  //       return dateA - dateB;
+  //     });
+  //     // console.log(sortedTransactions);
+
+  //     setTransactionArray(sortedTransactions);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }
 
   useEffect(() => {
     fetchData();
@@ -86,9 +115,13 @@ function ListTransactions() {
                     to={`/transactions/${item.id}`}
                   >
                     {item.category !== "Income" ? (
-                      <span className="text-danger">-${item.amount}</span>
+                      <span className="text-danger">
+                        -${item.amount.toFixed(2)}
+                      </span>
                     ) : (
-                      <span className="text-success">+${item.amount}</span>
+                      <span className="text-success">
+                        +${item.amount.toFixed(2)}
+                      </span>
                     )}
                   </Link>
                 </td>

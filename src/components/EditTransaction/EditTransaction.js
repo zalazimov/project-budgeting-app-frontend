@@ -15,16 +15,32 @@ function EditTransaction() {
     category: "",
   });
 
-  // Check to see about dropdown menu !!!!!!!!
-  //   const [isChecked, setIsChecked] = useState(transactionObj.mistakesWereMadeToday);
+  const categoryOptions = [
+    "Housing",
+    "Transportation",
+    "Income",
+    "Food",
+    "Utilities",
+    "Clothing",
+    "Medical/HealthCare",
+    "Insurance",
+    "Household Items",
+    "Debt",
+    "Personal",
+    "Retirement",
+    "Education",
+    "Savings",
+    "Gifts",
+    "Entertainment",
+  ];
 
   const API = process.env.REACT_APP_API_URL;
-
+  //   console.log(API)
   async function fetchData() {
     try {
       const result = await axios.get(`${API}/transactions/${id}`);
       setTransactionObj(result.data);
-      console.log(result.data);
+      //   console.log(result.data);
     } catch (e) {
       console.log(e);
     }
@@ -56,7 +72,6 @@ function EditTransaction() {
     }
 
     updateData();
-    // navigate(`/logs/${id}`);
   }
 
   return (
@@ -78,7 +93,7 @@ function EditTransaction() {
         </div>
         <div className="mb-3">
           <label className="fs-5 fw-medium form-label" htmlFor="date">
-            Title
+            Date
           </label>
           <input
             className="form-control"
@@ -106,14 +121,20 @@ function EditTransaction() {
           <label className="fs-5 fw-medium form-label" htmlFor="category">
             Category
           </label>
-          <input
+          <select
             className="form-control"
             id="category"
             name="category"
-            type="text"
             value={transactionObj.category}
             onChange={handleText}
-          />
+          >
+            <option value="">Select Category</option>
+            {categoryOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="mb-3">
           <label className="fs-5 fw-medium form-label" htmlFor="from">
