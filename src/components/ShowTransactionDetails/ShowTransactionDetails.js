@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 function ShowTransactionDetails() {
   const { id } = useParams();
-  console.log(id);
+
   const navigate = useNavigate();
 
-  const [singleTransaction, setSingleTransaction] = useState({});
+  const [singleTransaction, setSingleTransaction] = useState(null);
   const API = process.env.REACT_APP_API_URL;
   // console.log(API);
 
@@ -18,9 +18,7 @@ function ShowTransactionDetails() {
 
   async function fetchDataObj() {
     try {
-      const result = await axios.get(
-        `http://localhost:3001/transactions/${id}`
-      );
+      const result = await axios.get(`${API}/transactions/${id}`);
       setSingleTransaction(result.data);
       console.log(result.data);
     } catch (e) {
@@ -47,6 +45,7 @@ function ShowTransactionDetails() {
   }
 
   return (
+    // This is the Show Page
     <div className="container">
       <h1 className="text-center mt-5"></h1>
 
@@ -54,22 +53,24 @@ function ShowTransactionDetails() {
         <div className="card-body">
           <div>
             <h5 className="card-title text-center">
-              {singleTransaction.item_name}
+              {singleTransaction?.item_name}
             </h5>
 
             <p className="card-text">
-              <span className="fw-semibold">Date</span>:{singleTransaction.date}
+              <span className="fw-semibold">Date</span>:
+              {singleTransaction?.date}
             </p>
             <p className="card-text">
               <span className="fw-semibold">Amount</span>: $
-              {singleTransaction.amount}
+              {singleTransaction?.amount}
             </p>
             <p className="card-text">
               <span className="fw-semibold">Category</span>:
-              {singleTransaction.category}
+              {singleTransaction?.category}
             </p>
             <p className="card-text">
-              <span className="fw-semibold">From</span>:{singleTransaction.from}
+              <span className="fw-semibold">From</span>:
+              {singleTransaction?.from}
             </p>
           </div>
 
@@ -77,7 +78,7 @@ function ShowTransactionDetails() {
             <Link to="/transactions">
               <button className="btn btn-secondary">Back</button>
             </Link>
-            <Link to={`/logs/${id}/edit`}>
+            <Link to={`/transactions/${id}/edit`}>
               <button className="btn btn-secondary">Edit</button>
             </Link>
             <button className="btn btn-danger" onClick={handleDeleteOnClick}>

@@ -1,15 +1,15 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function ListTransactions() {
-  const { id } = useParams();
+  // const { id } = useParams();
   const [transactionArray, setTransactionArray] = useState([]);
   const [totalBalance, setTotalBalance] = useState(0);
 
   const API = process.env.REACT_APP_API_URL;
-  //   console.log(API);
+  // console.log(API);
 
   async function fetchData() {
     try {
@@ -30,6 +30,7 @@ function ListTransactions() {
         const dateB = new Date(b.date);
         return dateA - dateB;
       });
+      console.log(sortedTransactions);
 
       setTransactionArray(sortedTransactions);
       console.log(transactionArray);
@@ -42,6 +43,8 @@ function ListTransactions() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  console.log(transactionArray);
 
   return (
     <div className="text-center">
@@ -74,18 +77,18 @@ function ListTransactions() {
                 <td>
                   <Link
                     className="text-decoration-none"
-                    to={`/transactions/${id}`}
+                    to={`/transactions/${item.id}`}
                   >
                     {item.date}
                   </Link>
                 </td>
                 <td>
-                  <Link to={`/transactions/${id}`}>{item.item_name}</Link>
+                  <Link to={`/transactions/${item.id}`}>{item.item_name}</Link>
                 </td>
                 <td>
                   <Link
                     className="text-decoration-none"
-                    to={`/transactions/${id}`}
+                    to={`/transactions/${item.id}`}
                   >
                     {item.category !== "Income" ? (
                       <span className="text-danger">
