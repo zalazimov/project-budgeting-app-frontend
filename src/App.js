@@ -6,6 +6,7 @@ import ListTransactions from "./components/ListTransactions/ListTransactions";
 import "./App.css";
 import ShowTransactionDetails from "./components/ShowTransactionDetails/ShowTransactionDetails";
 import EditTransaction from "./components/EditTransaction/EditTransaction";
+import NewTransaction from "./components/NewTransaction/NewTransaction";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             element={<ShowTransactionDetails />}
           />
           <Route path="/transactions/:id/edit" element={<EditTransaction />} />
+          <Route path="/transactions/new" element={<NewTransaction />} />
         </Routes>
       </Router>
     </div>
