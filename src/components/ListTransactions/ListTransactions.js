@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function ListTransactions() {
-  // const { id } = useParams();
   const [transactionArray, setTransactionArray] = useState([]);
   const [totalBalance, setTotalBalance] = useState(0);
 
@@ -14,7 +13,7 @@ function ListTransactions() {
   async function fetchData() {
     try {
       const result = await axios.get(`${API}/transactions`);
-      //   console.log(result.data);
+
       let balance = 0;
       result.data.forEach((item) => {
         if (item.category !== "Income") {
@@ -30,11 +29,9 @@ function ListTransactions() {
         const dateB = new Date(b.date);
         return dateA - dateB;
       });
-      console.log(sortedTransactions);
+      // console.log(sortedTransactions);
 
       setTransactionArray(sortedTransactions);
-      console.log(transactionArray);
-      //   setTransactionArray(result.data);
     } catch (e) {
       console.log(e);
     }
@@ -43,8 +40,6 @@ function ListTransactions() {
   useEffect(() => {
     fetchData();
   }, []);
-
-  console.log(transactionArray);
 
   return (
     <div className="text-center">
@@ -76,7 +71,7 @@ function ListTransactions() {
               <tr key={item.id}>
                 <td>
                   <Link
-                    className="text-decoration-none"
+                    className="text-decoration-none text-body-secondary"
                     to={`/transactions/${item.id}`}
                   >
                     {item.date}
@@ -91,13 +86,9 @@ function ListTransactions() {
                     to={`/transactions/${item.id}`}
                   >
                     {item.category !== "Income" ? (
-                      <span className="text-danger">
-                        -${item.amount.toFixed(2)}
-                      </span>
+                      <span className="text-danger">-${item.amount}</span>
                     ) : (
-                      <span className="text-success">
-                        +${item.amount.toFixed(2)}
-                      </span>
+                      <span className="text-success">+${item.amount}</span>
                     )}
                   </Link>
                 </td>
