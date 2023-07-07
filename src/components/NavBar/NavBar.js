@@ -8,14 +8,16 @@ function NavBar() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <div className="navbar-nav">
             <div className="nav-item">
-              <Link className="nav-link" to="/logs">
-                <span className="fs-1 fw-semibold">BudgetExpert</span>
+              <Link className="nav-link" to="/transactions">
+                <span className="fs-1 fw-medium">
+                  Budget<span className="fw-bold">Expert</span>
+                </span>
               </Link>
             </div>
           </div>
           <div className="navbar-nav ms-auto">
             <div className="nav-item">
-              <Link className="nav-link" to="/logs/new">
+              <Link className="nav-link" to="/transactions/new">
                 <button className="button mt-2 btn btn-outline-dark btn-lg">
                   NEW TRANSACTION
                 </button>

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import ListTransactions from "./components/ListTransactions/ListTransactions";
 import "./App.css";
+import ShowTransactionDetails from "./components/ShowTransactionDetails/ShowTransactionDetails";
 
 function App() {
   return (
@@ -12,7 +13,11 @@ function App() {
         <NavBar />
         <Routes>
           {/* <Route path="/" element={<Home />} /> */}
-          <Route path="/" element={<ListTransactions />} />
+          <Route path="/transactions" element={<ListTransactions />} />
+          <Route
+            path="/transactions/:id"
+            element={<ShowTransactionDetails />}
+          />
         </Routes>
       </Router>
     </div>

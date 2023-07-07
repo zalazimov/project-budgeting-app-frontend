@@ -1,8 +1,10 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 
 function ListTransactions() {
+  const { id } = useParams();
   const [transactionArray, setTransactionArray] = useState([]);
   const [totalBalance, setTotalBalance] = useState(0);
 
@@ -42,35 +44,57 @@ function ListTransactions() {
   }, []);
 
   return (
-    <div className="">
-      <h2 className="h2-main-title">Bank Account Total: ${totalBalance}</h2>
-      <div>
-        <div className="table-container">
-          <table id="transactions">
-            <tbody>
-              <tr>
-                <th>Date</th>
-                <th>Type</th>
-                <th>Amount</th>
-              </tr>
-              {transactionArray.map((item) => {
-                // console.log(item.category);
-
-                return (
-                  <tr key={item.id}>
-                    <td>{item.date}</td>
-                    <td>{item.item_name}</td>
+    <div className="text-center">
+      <h2
+        className={
+          totalBalance > 100
+            ? "text-success"
+            : totalBalance >= 0
+            ? "text-warning"
+            : "text-danger"
+        }
+      >
+        Bank Account Total: ${totalBalance}
+      </h2>
+      <div className="table-responsive">
+        <table className="table table-bordered table-striped">
+          <thead className="table-dark">
+            <tr>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {transactionArray.map((item) => (
+              <tr key={item.id}>
+                <td>
+                  <Link
+                    className="text-decoration-none"
+                    to={`/transactions/${id}`}
+                  >
+                    {item.date}
+                  </Link>
+                </td>
+                <td>
+                  <Link to={`/transactions/${id}`}>{item.item_name}</Link>
+                </td>
+                <td>
+                  <Link
+                    className="text-decoration-none"
+                    to={`/transactions/${id}`}
+                  >
                     {item.category !== "Income" ? (
-                      <td>-${item.amount}</td>
+                      <span className="text-danger">-${item.amount}</span>
                     ) : (
-                      <td>${item.amount}</td>
+                      <span className="text-success">+${item.amount}</span>
                     )}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
