@@ -59,11 +59,17 @@ function EditTransaction() {
     "Entertainment",
   ];
 
-  const API = process.env.REACT_APP_API_URL;
+  // const API = process.env.REACT_APP_API_URL;
   //   console.log(API)
+
+  let url =
+    process.env.NODE_ENV === "production"
+      ? "https://project-budgeting-app-backend.onrender.com/"
+      : "http://localhost:3001";
+
   async function fetchData() {
     try {
-      const result = await axios.get(`${API}/transactions/${id}`);
+      const result = await axios.get(`${url}/transactions/${id}`);
       setTransactionObj(result.data);
       //   console.log(result.data);
     } catch (e) {
@@ -87,7 +93,7 @@ function EditTransaction() {
     async function updateData() {
       try {
         const result = await axios.put(
-          `${API}/transactions/${id}`,
+          `${url}/transactions/${id}`,
           transactionObj
         );
 

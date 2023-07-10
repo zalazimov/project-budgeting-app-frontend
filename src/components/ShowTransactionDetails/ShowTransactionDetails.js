@@ -9,7 +9,7 @@ function ShowTransactionDetails() {
   const navigate = useNavigate();
 
   const [singleTransaction, setSingleTransaction] = useState(null);
-  const API = process.env.REACT_APP_API_URL;
+  // const API = process.env.REACT_APP_API_URL;
   // console.log(API);
 
   useEffect(() => {
@@ -17,8 +17,13 @@ function ShowTransactionDetails() {
   }, []);
 
   async function fetchDataObj() {
+    let url =
+      process.env.NODE_ENV === "production"
+        ? "https://project-budgeting-app-backend.onrender.com/"
+        : "http://localhost:3001";
+
     try {
-      const result = await axios.get(`${API}/transactions/${id}`);
+      const result = await axios.get(`${url}/transactions/${id}`);
       setSingleTransaction(result.data);
       // console.log(result.data);
     } catch (e) {
@@ -27,9 +32,14 @@ function ShowTransactionDetails() {
   }
 
   function handleDeleteOnClick() {
+    let url =
+      process.env.NODE_ENV === "production"
+        ? "https://project-budgeting-app-backend.onrender.com/"
+        : "http://localhost:3001";
+
     async function deleteData() {
       try {
-        const result = await axios.delete(`${API}/transactions/${id}`);
+        const result = await axios.delete(`${url}/transactions/${id}`);
         return result.data;
       } catch (e) {
         console.log(e);

@@ -9,12 +9,17 @@ function NavBar() {
   const [totalBalance, setTotalBalance] = useState(0);
   const location = useLocation();
 
-  const API = process.env.REACT_APP_API_URL;
+  // const API = process.env.REACT_APP_API_URL;
   // console.log(API);
+
+  let url =
+    process.env.NODE_ENV === "production"
+      ? "https://project-budgeting-app-backend.onrender.com/"
+      : "http://localhost:3001";
 
   async function fetchData() {
     try {
-      const result = await axios.get(`${API}/transactions`);
+      const result = await axios.get(`${url}/transactions`);
 
       let balance = 0;
       result.data.forEach((item) => {

@@ -17,7 +17,7 @@ function NewTransaction() {
     category: "",
   });
 
-  const API = process.env.REACT_APP_API_URL;
+  // const API = process.env.REACT_APP_API_URL;
 
   const categoryOptions = [
     "Housing",
@@ -65,9 +65,14 @@ function NewTransaction() {
   function handleOnSubmit(e) {
     e.preventDefault();
     async function newData() {
+      let url =
+        process.env.NODE_ENV === "production"
+          ? "https://project-budgeting-app-backend.onrender.com/"
+          : "http://localhost:3001";
+
       try {
         await axios
-          .post(`${API}/transactions`, transactionObj)
+          .post(`${url}/transactions`, transactionObj)
           .then((result) => navigate(`/transactions/${result.data.data.id}`));
 
         // setTransactionObj(result.data);
