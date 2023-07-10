@@ -5,7 +5,6 @@ import { v4 } from "uuid";
 
 function NewTransaction() {
   const navigate = useNavigate();
-  //   const [dates, setDates] = useState([]);
 
   const id = v4().slice(0, 4);
   const [transactionObj, setTransactionObj] = useState({
@@ -17,6 +16,21 @@ function NewTransaction() {
     category: "",
   });
 
+  function generateDates() {
+    const today = new Date();
+    const dates = [];
+
+    for (let i = 0; i < 90; i++) {
+      const date = new Date(today);
+      date.setDate(date.getDate() - i);
+      const formattedDate = date.toISOString().slice(0, 10); // Format: 'YYYY-MM-DD'
+      dates.push(formattedDate);
+    }
+
+    return dates;
+  }
+
+  const dates = generateDates();
   // const API = process.env.REACT_APP_API_URL;
 
   const categoryOptions = [
@@ -38,29 +52,12 @@ function NewTransaction() {
     "Entertainment",
   ];
 
-  //   function getDates() {
-  // Get the current date and time
-  const currentDate = new Date();
-  // Create an array to store the dates
-  const datesBeforeCurrent = [];
-  // Loop to generate 30 dates before the current date
-  for (let i = 1; i <= 60; i++) {
-    // Get the date i days before the current date
-    const dateBefore = new Date(currentDate);
-    dateBefore.setDate(currentDate.getDate() - i);
-
-    // Add the date to the array
-    datesBeforeCurrent.push(dateBefore);
-  }
-  // Output the array of dates
-  // console.log(datesBeforeCurrent); // array data type
-  // return datesBeforeCurrent;
-
-  //   setDates(getDates());
-
   function handleText(e) {
+    console.log(e.target.value);
     setTransactionObj({ ...transactionObj, [e.target.id]: e.target.value });
   }
+
+  console.log(transactionObj);
 
   function handleOnSubmit(e) {
     e.preventDefault();
@@ -114,10 +111,10 @@ function NewTransaction() {
             value={transactionObj.date}
             onChange={handleText}
           >
-            {datesBeforeCurrent.map((option, index) => (
-              <option key={index} value={JSON.stringify(option).slice(1, 11)}>
-                {/* {option} */}
-                {JSON.stringify(option).slice(1, 11)}
+            {dates.map((option) => (
+              <option key={option} value={option}>
+                {option}
+                {/* {JSON.stringify(option).slice(1, 11)} */}
               </option>
             ))}
           </select>
