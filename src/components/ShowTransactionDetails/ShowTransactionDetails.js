@@ -20,7 +20,7 @@ function ShowTransactionDetails() {
     try {
       const result = await axios.get(`${API}/transactions/${id}`);
       setSingleTransaction(result.data);
-      console.log(result.data);
+      // console.log(result.data);
     } catch (e) {
       console.log(e);
     }

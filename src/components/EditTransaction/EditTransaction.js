@@ -15,6 +15,31 @@ function EditTransaction() {
     category: "",
   });
 
+  const [dates, setDates] = useState([]);
+
+  function getDates() {
+    // Get the current date and time
+    const currentDate = new Date();
+    // Create an array to store the dates
+    const datesBeforeCurrent = [];
+    // Loop to generate 30 dates before the current date
+    for (let i = 1; i <= 30; i++) {
+      // Get the date i days before the current date
+      const dateBefore = new Date(currentDate);
+      dateBefore.setDate(currentDate.getDate() - i);
+
+      // Add the date to the array
+      datesBeforeCurrent.push(dateBefore);
+    }
+    // Output the array of dates
+    // console.log(datesBeforeCurrent); // array data type
+    return datesBeforeCurrent;
+  }
+
+  // getDates();
+  // const dates = ["1", "2", "3", "4", "5", "6", "7", "8"];
+  // console.log(Array.isArray(dates));
+
   const categoryOptions = [
     "Housing",
     "Transportation",
@@ -48,6 +73,8 @@ function EditTransaction() {
 
   useEffect(() => {
     fetchData();
+    let dateArr = getDates();
+    setDates(dateArr);
   }, [id]);
 
   function handleText(e) {
@@ -95,14 +122,20 @@ function EditTransaction() {
           <label className="fs-5 fw-medium form-label" htmlFor="date">
             Date
           </label>
-          <input
+          <select
             className="form-control"
-            id="date"
-            name="date"
-            type="text"
+            id="Date"
+            name="Date"
             value={transactionObj.date}
             onChange={handleText}
-          />
+          >
+            {dates.map((option) => (
+              <option key={option} value={option}>
+                {/* {Object.keys(option)} */}
+                {JSON.stringify(option).slice(1, 11)}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="mb-3">
           <label className="fs-5 fw-medium form-label" htmlFor="amount">
@@ -149,7 +182,6 @@ function EditTransaction() {
             onChange={handleText}
           />
         </div>
-
         <input type="submit" className="btn btn-primary" />
       </form>
       <br />
