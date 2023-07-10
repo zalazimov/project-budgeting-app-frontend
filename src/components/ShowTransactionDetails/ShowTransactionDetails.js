@@ -51,7 +51,7 @@ function ShowTransactionDetails() {
   }
 
   return (
-    // This is the Show Page
+    // Show Page
     <div className="container">
       <div className="card mx-auto mt-5" style={{ width: "24rem" }}>
         <div className="card-body">

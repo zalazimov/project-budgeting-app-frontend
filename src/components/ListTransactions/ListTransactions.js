@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 function ListTransactions() {
   const [transactionArray, setTransactionArray] = useState([]);
-  // const [totalBalance, setTotalBalance] = useState(0);
 
   // const API = process.env.REACT_APP_API_URL;
   // console.log(API);
@@ -18,8 +17,6 @@ function ListTransactions() {
 
     try {
       const result = await axios.get(`${url}/transactions`);
-
-      // console.log(result);
 
       const sortedTransactions = result.data.sort((a, b) => {
         const dateA = new Date(a.date);

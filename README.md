@@ -16,9 +16,10 @@
 <li> Best of all, you can track your spending/usage and can view a color-coded layout of your incoming funds vs outgoing expenses, which is reflected in a color-coded total balance</li>
 </ol>
 
-<!-- <a href="">Trello</a> -->
+<a href="https://zalazimov.github.io/project-budgeting-app-backend/">Backend Github Repository</a> -->
 
-<!-- <a href="">Backend GitHub Repository</a> -->
+<a href="https://zalazimov.github.io/project-budgeting-app-frontend/">Frontend GitHub Repository</a>
 
-<!-- Netlify link -->
-<!-- onrender link? -->
+<a href="https://project-budgeting-app-backend.onrender.com/transactions">Render Deployed Link</a>
+
+<a href="https://charming-starship-9c5cf9.netlify.app/">Netlify Deployed Link</a>

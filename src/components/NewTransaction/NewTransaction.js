@@ -23,7 +23,7 @@ function NewTransaction() {
     for (let i = 0; i < 90; i++) {
       const date = new Date(today);
       date.setDate(date.getDate() - i);
-      const formattedDate = date.toISOString().slice(0, 10); // Format: 'YYYY-MM-DD'
+      const formattedDate = date.toISOString().slice(0, 10);
       dates.push(formattedDate);
     }
 
@@ -53,7 +53,7 @@ function NewTransaction() {
   ];
 
   function handleText(e) {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setTransactionObj({ ...transactionObj, [e.target.id]: e.target.value });
   }
 
@@ -71,9 +71,6 @@ function NewTransaction() {
         await axios
           .post(`${url}/transactions`, transactionObj)
           .then((result) => navigate(`/transactions/${result.data.data.id}`));
-
-        // setTransactionObj(result.data);
-        // console.log(transactionObj);
       } catch (e) {
         console.log(e);
       }
