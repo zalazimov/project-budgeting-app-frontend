@@ -14,7 +14,7 @@ function NavBar() {
 
   let url =
     process.env.NODE_ENV === "production"
-      ? "https://project-budgeting-app-backend.onrender.com/"
+      ? "https://project-budgeting-app-backend.onrender.com"
       : "http://localhost:3001";
 
   async function fetchData() {
