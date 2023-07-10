@@ -11,8 +11,15 @@ function ListTransactions() {
   console.log(API);
 
   async function fetchData() {
+    let url =
+      process.env.NODE_ENV === "production"
+        ? "https://project-budgeting-app-backend.onrender.com/"
+        : "http://localhost:3001";
+
     try {
-      const result = await axios.get(`${API}/transactions`);
+      const result = await axios.get(`${url}/transactions`);
+
+      console.log(result);
 
       const sortedTransactions = result.data.sort((a, b) => {
         const dateA = new Date(a.date);
