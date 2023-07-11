@@ -46,8 +46,10 @@ function ShowTransactionDetails() {
       }
     }
 
-    deleteData();
-    navigate(`/transactions`);
+    deleteData().then(() => {
+      navigate(`/transactions`);
+    });
+    // navigate(`/transactions`)
   }
 
   return (
