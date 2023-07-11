@@ -22,4 +22,4 @@
 
 <a href="https://project-budgeting-app-backend.onrender.com/transactions">Render Deployed Link</a>
 
-<a href="https://charming-starship-9c5cf9.netlify.app/">Netlify Deployed Link</a>
+<a href="https://budgetexpert.netlify.app/">Netlify Deployed Link</a>
